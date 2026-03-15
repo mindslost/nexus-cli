@@ -10,8 +10,8 @@ Nexus is designed to be both a frictionless human interface for knowledge captur
 
 - **PARA Method Enforcement**: Organizes notes into four distinct categories: *Projects*, *Areas*, *Resources*, and *Archives*.
 - **Frictionless Capture**: Use your native `$EDITOR` (Vim, Emacs, Nano, etc.) to write notes in standard Markdown.
-- **SQLite + FTS5**: Notes are indexed in real-time using SQLite's FTS5 virtual table for instant full-text search across titles, content, and tags.
-- **YAML Frontmatter**: Metadata is stored directly in the Markdown file, ensuring your notes remain portable and self-contained.
+- **SQLite + FTS5**: Notes are indexed in real-time using SQLite's FTS5 virtual table for instant full-text search across titles, content, and tags. Search results include context snippets for human-readable output.
+- **YAML Frontmatter**: Metadata is stored directly in the Markdown file, ensuring your notes remain portable and self-contained. Supports complex titles with quotes and colons.
 - **AI-Ready**:
   - **MCP Server**: Built-in support for the Model Context Protocol, allowing AI agents (like Claude Code) to autonomously search and retrieve your notes.
   - **Machine-Readable Output**: The `search` command includes a `--raw` flag that outputs clean XML specifically formatted for LLM context windows.
@@ -70,7 +70,7 @@ Displays a tree structure of all your notes organized by PARA category.
 nexus search "database optimization"
 ```
 
-Uses FTS5 for a high-speed search across all note titles and content.
+Uses FTS5 for a high-speed search across all note titles and content, displaying highlighted context snippets.
 
 ### 4. Edit a Note
 
@@ -83,6 +83,14 @@ nexus edit "New Feature Specs"
 ```bash
 nexus move "Old Project" --to Archive
 ```
+
+### 6. Delete a Note
+
+```bash
+nexus delete "Old Project"
+```
+
+Removes a note by ID or Title with a confirmation prompt.
 
 ---
 

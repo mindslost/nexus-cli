@@ -44,10 +44,11 @@ tags: [python, security, api]
 
 ### 4. Core Workflows
 * **`nexus add [Title] --para [P|A|R|A]`**: Generates a UUID and a temp Markdown file with YAML frontmatter. Launches `$EDITOR`. On save, parses YAML and `INSERT`s into SQLite.
-* **`nexus edit [ID|Title]`**: Fetches document from SQLite, opens `$EDITOR`. On save, if modified, re-parses YAML and `UPDATE`s SQLite.
-* **`nexus move [ID|Title] --to [P|A|R|A]`**: Programmatically rewrites the `para:` line within the YAML block using regex, then `UPDATE`s SQLite.
+* **`nexus edit [ID|Title]`**: Fetches document from SQLite, opens `$EDITOR`. On save, if modified, validates YAML frontmatter and `UPDATE`s SQLite.
+* **`nexus move [ID|Title] --to [P|A|R|A]`**: Programmatically parses and reconstructs the YAML frontmatter block to update the `para:` category, then `UPDATE`s SQLite. This ensures the body of the note is never accidentally modified.
+* **`nexus delete [ID|Title]`**: Removes a note from the database after a user confirmation.
 * **`nexus search "query" [--para Category] [--raw]`**: 
-    * *Human Mode:* Returns a formatted terminal table highlighting keyword matches.
+    * *Human Mode:* Returns a formatted terminal table highlighting keyword matches using SQLite's `snippet()` function.
     * *Machine Mode (`--raw`):* Bypasses terminal formatting, returning clean XML (`<context><note>...</note></context>`) for LLM prompt injection.
 
 ---
@@ -87,11 +88,12 @@ Implement `extract_frontmatter(raw_content: str) -> tuple[dict, str]` using Pyth
 
 ### 5. CLI Commands (`nexus_cli/main.py`)
 Use `typer` for routing and `rich` for terminal output. Implement:
-* `add`: Generate UUID -> Temp file with YAML -> Open `$EDITOR` -> Parse -> Insert to DB.
-* `edit`: Fetch -> Temp file -> Open `$EDITOR` -> Parse -> Update DB.
-* `move`: Fetch -> Regex replace `para:` in YAML -> Update DB.
+* `add`: Generate UUID -> Temp file with YAML -> Open `$EDITOR` -> Parse & Validate -> Insert to DB.
+* `edit`: Fetch -> Temp file -> Open `$EDITOR` -> Parse & Validate -> Update DB.
+* `move`: Parse and reconstruct frontmatter block to update `para:` field -> Update DB.
+* `delete`: Prompt for confirmation -> Delete from DB.
 * `search`: Query FTS5 (`MATCH ? ORDER BY rank`). 
-  * If not raw, print a `rich` Table using SQLite's `snippet()` function.
+  * If not raw, print a `rich` Table using SQLite's `snippet()` function to show context matches.
   * If `--raw`, strictly output this exact format:
     `<context>`
     `  <note title="{title}" category="{para}" last_updated="{date}">`
