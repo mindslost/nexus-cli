@@ -38,8 +38,10 @@ def get_editor() -> str:
 
 def format_yaml_frontmatter(title: str, category: str, tags: List[str]) -> str:
     """Format title, category and tags into standard YAML frontmatter."""
+    # Escape double quotes in title
+    safe_title = title.replace('"', '\\"')
     tags_str = ", ".join(f'"{t}"' for t in tags)
-    return f'---\ntitle: "{title}"\npara: {category}\ntags: [{tags_str}]\n---\n\n'
+    return f'---\ntitle: "{safe_title}"\npara: {category}\ntags: [{tags_str}]\n---\n\n'
 
 
 @app.command()
@@ -75,6 +77,9 @@ def add(
             edited_content = f.read()
 
         metadata, _ = extract_frontmatter(edited_content)
+        if not metadata:
+            console.print("[red]Error: Invalid frontmatter. Note not saved.[/red]")
+            raise typer.Exit(1)
 
         final_title = metadata.get("title", title)
         final_para = metadata.get("para", para)
@@ -137,6 +142,10 @@ def edit(identifier: str) -> None:
             return
 
         metadata, _ = extract_frontmatter(new_content)
+        if not metadata:
+            console.print("[red]Error: Invalid frontmatter format. Changes not saved.[/red]")
+            return
+
         final_title = metadata.get("title", old_title)
         final_para = metadata.get("para")
 
@@ -223,7 +232,29 @@ def move(
 
     note_id, title, content = row
 
-    new_content = re.sub(r"^(para:\s*).+$", rf"\g<1>{to}", content, flags=re.MULTILINE)
+    # Safer move: Parse and reconstruct frontmatter
+    metadata, body = extract_frontmatter(content)
+    if not metadata:
+        # Fallback to regex if parsing fails for some reason
+        console.print("[yellow]Warning: Could not parse frontmatter robustly. Falling back to regex replacement.[/yellow]")
+        new_content = re.sub(r"^(para:\s*).+$", rf"\g<1>{to}", content, flags=re.MULTILINE)
+    else:
+        metadata["para"] = to
+        # Reconstruct YAML block
+        yaml_lines = ["---"]
+        for k, v in metadata.items():
+            if k == "tags" and isinstance(v, list):
+                v_str = "[" + ", ".join(f'"{t}"' for t in v) + "]"
+                yaml_lines.append(f"{k}: {v_str}")
+            else:
+                # Escape quotes in values if they are strings
+                if isinstance(v, str):
+                    v_safe = v.replace('"', '\\"')
+                    yaml_lines.append(f'{k}: "{v_safe}"')
+                else:
+                    yaml_lines.append(f"{k}: {v}")
+        yaml_lines.append("---")
+        new_content = "\n".join(yaml_lines) + "\n\n" + body
 
     try:
         with get_db() as conn:
@@ -240,6 +271,38 @@ def move(
 
 
 @app.command()
+def delete(identifier: str) -> None:
+    """Delete a note by ID or Title."""
+    with get_db() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT id, title FROM notes WHERE id = ? OR title = ?",
+            (identifier, identifier),
+        )
+        row = cursor.fetchone()
+
+    if not row:
+        console.print(f"[red]Error: Note '{identifier}' not found.[/red]")
+        raise typer.Exit(1)
+
+    note_id, title = row
+    confirm = typer.confirm(f"Are you sure you want to delete '{title}'?")
+    if not confirm:
+        console.print("Deletion cancelled.")
+        return
+
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM notes WHERE id = ?", (note_id,))
+            conn.commit()
+        console.print(f"[green]Note '{title}' deleted successfully.[/green]")
+    except sqlite3.Error as e:
+        console.print(f"[red]Failed to delete note: {e}[/red]")
+        raise typer.Exit(1) from e
+
+
+@app.command()
 def search(
     query: str,
     para: Optional[str] = typer.Option(None, help="Filter by PARA category"),
@@ -252,22 +315,23 @@ def search(
 
             if para:
                 sql = """
-                    SELECT n.title, n.para_category, n.updated_at, n.content 
-                    FROM notes_fts f
-                    JOIN notes n ON f.rowid = n.rowid
+                    SELECT n.title, n.para_category, n.updated_at, n.content,
+                           snippet(notes_fts, -1, '[bold yellow]', '[/bold yellow]', '...', 20)
+                    FROM notes_fts
+                    JOIN notes n ON notes_fts.rowid = n.rowid
                     WHERE notes_fts MATCH ? AND n.para_category = ?
                     ORDER BY rank
                 """
                 params = (query, para)
             else:
                 sql = """
-                    SELECT n.title, n.para_category, n.updated_at, n.content 
-                    FROM notes_fts f
-                    JOIN notes n ON f.rowid = n.rowid
+                    SELECT n.title, n.para_category, n.updated_at, n.content,
+                           snippet(notes_fts, -1, '[bold yellow]', '[/bold yellow]', '...', 20)
+                    FROM notes_fts
+                    JOIN notes n ON notes_fts.rowid = n.rowid
                     WHERE notes_fts MATCH ?
                     ORDER BY rank
                 """
-
                 params = (query,)
 
             cursor.execute(sql, params)
@@ -282,7 +346,7 @@ def search(
 
     if raw:
         xml_output = []
-        for title, category, updated_at, content in results:
+        for title, category, updated_at, content, snippet in results:
             xml_output.append(
                 f'<context><note title="{title}" category="{category}" last_updated="{updated_at}">{content}</note></context>'
             )
@@ -291,10 +355,13 @@ def search(
         table = Table(title=f"Search Results for '{query}'")
         table.add_column("Title", style="cyan")
         table.add_column("Category", style="magenta")
+        table.add_column("Snippet", style="white")
         table.add_column("Last Updated", style="green")
 
-        for title, category, updated_at, content in results:
-            table.add_row(title, category, str(updated_at))
+        for title, category, updated_at, content, snippet in results:
+            # Replace literal newlines in snippet to keep table clean
+            clean_snippet = (snippet or "").replace("\n", " ")
+            table.add_row(title, category, clean_snippet, str(updated_at))
 
         console.print(table)
 
