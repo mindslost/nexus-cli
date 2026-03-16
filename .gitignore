@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 26.0.1
 .para_notes.db
+build/
