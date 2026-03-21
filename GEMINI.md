@@ -1,10 +1,10 @@
-# Nexus CLI: Project Context & Instructions
+# Ostraca CLI: Project Context & Instructions
 
-This document provides essential context, architectural overviews, and operational guidelines for the **Nexus CLI** project.
+This document provides essential context, architectural overviews, and operational guidelines for the **Ostraca CLI** project.
 
 ## Project Overview
 
-**Nexus CLI** is a terminal-based personal knowledge base (PKB) that enforces the **PARA** (Projects, Areas, Resources, Archives) organization method. It is designed for frictionless human capture via terminal editors and high-performance context retrieval for AI agents.
+**Ostraca CLI** is a terminal-based personal knowledge base (PKB) that enforces the **PARA** (Projects, Areas, Resources, Archives) organization method. It is designed for frictionless human capture via terminal editors and high-performance context retrieval for AI agents.
 
 ### Core Technologies
 - **Language**: Python 3.9+
@@ -23,9 +23,9 @@ This document provides essential context, architectural overviews, and operation
 
 ## Project Structure
 
-- `nexus_cli/main.py`: Entry point for the Typer CLI and FastMCP server. Contains command logic and tool definitions.
-- `nexus_cli/db.py`: Database schema definition, FTS5 trigger setup, and connection utilities.
-- `nexus_cli/frontmatter.py`: Logic for extracting and manipulating YAML frontmatter from Markdown content.
+- `ostraca_cli/main.py`: Entry point for the Typer CLI and FastMCP server. Contains command logic and tool definitions.
+- `ostraca_cli/db.py`: Database schema definition, FTS5 trigger setup, and connection utilities.
+- `ostraca_cli/frontmatter.py`: Logic for extracting and manipulating YAML frontmatter from Markdown content.
 - `docs/`: Comprehensive design specifications, methodology guides, and system prompts.
 
 ---
@@ -39,13 +39,13 @@ pip install -e .
 ```
 
 ### Key CLI Commands
-- `nexus add "Title" --para [Category]`: Create a new note.
-- `nexus search "query"`: Perform full-text search with context snippets.
-- `nexus list`: View the PARA tree structure.
-- `nexus edit [ID|Title]`: Edit an existing note in your `$EDITOR`.
-- `nexus move [ID|Title] --to [Category]`: Re-categorize a note.
-- `nexus delete [ID|Title]`: Remove a note with a confirmation prompt.
-- `nexus mcp-start`: Launch the MCP server for AI integration.
+- `ost add "Title" --para [Category]`: Create a new note.
+- `ost search "query"`: Perform full-text search with context snippets.
+- `ost list`: View the PARA tree structure.
+- `ost edit [ID|Title]`: Edit an existing note in your `$EDITOR`.
+- `ost move [ID|Title] --to [Category]`: Re-categorize a note.
+- `ost delete [ID|Title]`: Remove a note with a confirmation prompt.
+- `ost mcp-start`: Launch the MCP server for AI integration.
 
 ### Testing
 Currently, the project uses manual verification and simulation scripts (e.g., `test_collision.py`). 
@@ -67,10 +67,10 @@ Currently, the project uses manual verification and simulation scripts (e.g., `t
 ### Frontmatter Parsing
 - Metadata is the source of truth for `title`, `para_category`, and `tags`. 
 - When editing or moving a note, the database fields must be synchronized with the parsed frontmatter.
-- Use `extract_frontmatter` from `nexus_cli/frontmatter.py` to handle edge cases like quoted titles or complex tag arrays.
+- Use `extract_frontmatter` from `ostraca_cli/frontmatter.py` to handle edge cases like quoted titles or complex tag arrays.
 
 ### MCP Tools
-When adding new features, ensure they are exposed as MCP tools in `nexus_cli/main.py` using the `@mcp.tool()` decorator if they provide useful context for AI agents.
+When adding new features, ensure they are exposed as MCP tools in `ostraca_cli/main.py` using the `@mcp.tool()` decorator if they provide useful context for AI agents.
 
 ---
 

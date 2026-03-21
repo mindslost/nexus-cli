@@ -1,5 +1,5 @@
 {
-  "name": "nexus.cli",
-  "description": "A terminal-centric landing page for Nexus CLI, the command-line brain for the AI era.",
+  "name": "Ostraca",
+  "description": "Frictionless markdown for humans. High-speed context for AI. A blazing-fast personal knowledge base built with Python and SQLite that natively enforces the PARA method.",
   "requestFramePermissions": []
 }

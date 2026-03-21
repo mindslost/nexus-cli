@@ -1,5 +1,5 @@
 """
-Frontmatter parsing for the Nexus CLI.
+Frontmatter parsing for the Ostraca CLI.
 
 This module provides utilities to extract YAML-like frontmatter from
 Markdown files. It handles quoted values, escaped characters, and

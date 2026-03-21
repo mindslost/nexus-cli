@@ -1,5 +1,5 @@
 """
-Nexus CLI - Personal Knowledge Base enforcing the PARA method.
+Ostraca CLI - Personal Knowledge Base enforcing the PARA method.
 
 This module provides the main CLI entry point using Typer and exposes
 MCP (Model Context Protocol) tools for AI agents to interact with the notes.
@@ -19,16 +19,16 @@ from rich.console import Console
 from rich.table import Table
 from rich.tree import Tree
 
-from nexus_cli.db import get_db, init_db, PARA_CATEGORIES
-from nexus_cli.frontmatter import extract_frontmatter
-from nexus_cli.tui import NexusListApp
+from ostraca_cli.db import get_db, init_db, PARA_CATEGORIES
+from ostraca_cli.frontmatter import extract_frontmatter
+from ostraca_cli.tui import OstracaListApp
 
 # Initialize Typer app and FastMCP server
 app = typer.Typer(
-    help="Nexus CLI - A terminal-based personal knowledge base enforcing the PARA method.",
+    help="Ostraca CLI - A terminal-based personal knowledge base enforcing the PARA method.",
     add_completion=True,
 )
-mcp = FastMCP("Nexus")
+mcp = FastMCP("Ostraca")
 console = Console()
 
 # Run DB initialization when the application starts to ensure schema is up to date
@@ -313,7 +313,7 @@ def open_note(
     edit_content(content)
     console.print(
         f"[red]Opened in read-only mode.[/red] [bold red]No changes saved.[/bold red] "
-        f"To make changes run \"nexus edit '{title}'\"."
+        f"To make changes run \"ost edit '{title}'\"."
     )
 
 
@@ -497,7 +497,7 @@ def list_notes(
                 break
 
             # Launch the interactive TUI
-            app_instance = NexusListApp(results)
+            app_instance = OstracaListApp(results)
             result = app_instance.run()
 
             if not result:
@@ -528,7 +528,7 @@ def list_notes(
             return
 
         # Render static tree
-        tree = Tree("Nexus")
+        tree = Tree("Ostraca")
         categories = {}
         for note_id, title, cat, tags_str in results:
             categories.setdefault(cat, []).append((note_id, title, tags_str))
@@ -548,7 +548,7 @@ def list_notes(
 
 
 @mcp.tool()
-def search_nexus_notes(query: str, category: Optional[str] = None) -> str:
+def search_ostraca_notes(query: str, category: Optional[str] = None) -> str:
     """
     Search your personal knowledge base using FTS5.
 

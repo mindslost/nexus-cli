@@ -25,12 +25,12 @@ const Navbar = ({ isOled, toggleOled }: { isOled: boolean, toggleOled: () => voi
   <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-charcoal/80 backdrop-blur-md px-6 py-4 flex justify-between items-center">
     <div className="flex items-center gap-2">
       <Terminal className="text-terminal-green w-6 h-6" />
-      <span className="font-bold tracking-tighter text-xl">nexus.cli</span>
+      <span className="font-bold tracking-tighter text-xl">ostraca.cli</span>
     </div>
     <div className="flex items-center gap-6">
       <a href="#features" className="text-sm hover:text-terminal-green transition-colors hidden md:block">Features</a>
       <a href="#demo" className="text-sm hover:text-terminal-green transition-colors hidden md:block">Demo</a>
-      <a href="https://github.com/mindslost/nexus-cli/blob/main/docs/documentation.md" target="_blank" rel="noreferrer" className="text-sm hover:text-terminal-green transition-colors hidden md:block">Docs</a>
+      <a href="https://github.com/mindslost/ostraca/blob/main/docs/documentation.md" target="_blank" rel="noreferrer" className="text-sm hover:text-terminal-green transition-colors hidden md:block">Docs</a>
       <button 
         onClick={toggleOled}
         className={`p-2 rounded-full transition-all ${isOled ? 'bg-terminal-green text-black' : 'bg-white/5 text-white hover:bg-white/10'}`}
@@ -38,7 +38,7 @@ const Navbar = ({ isOled, toggleOled }: { isOled: boolean, toggleOled: () => voi
       >
         <Power className="w-4 h-4" />
       </button>
-      <a href="https://github.com/mindslost/nexus-cli" target="_blank" rel="noreferrer" className="bg-white text-black px-4 py-1.5 rounded text-sm font-bold hover:bg-terminal-green transition-colors flex items-center gap-2">
+      <a href="https://github.com/mindslost/ostraca" target="_blank" rel="noreferrer" className="bg-white text-black px-4 py-1.5 rounded text-sm font-bold hover:bg-terminal-green transition-colors flex items-center gap-2">
         <Github className="w-4 h-4" />
         GitHub
       </a>
@@ -63,12 +63,12 @@ const Hero = () => {
           <span>v1.2.0 is now live with MCP support</span>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
-          nexus cli <span className="text-terminal-green">"the future of notes"</span>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 leading-tight">
+          Ostraca: <span className="text-terminal-green">Frictionless markdown for humans. High-speed context for AI.</span>
         </h1>
         
         <p className="text-xl md:text-2xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">
-          A PARA-method PKB that speaks the language of both humans and AI.
+          A blazing-fast personal knowledge base built with Python and SQLite that natively enforces the PARA method.
         </p>
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
@@ -88,13 +88,13 @@ const Hero = () => {
           <div className="w-3 h-3 rounded-full bg-red-500/50" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
           <div className="w-3 h-3 rounded-full bg-green-500/50" />
-          <div className="ml-4 text-[10px] text-white/30 uppercase tracking-widest">nexus-cli — bash — 80x24</div>
+          <div className="ml-4 text-[10px] text-white/30 uppercase tracking-widest">ostraca-cli — bash — 80x24</div>
         </div>
         
         <div className="p-8 text-left font-mono text-[10px] md:text-xs leading-relaxed h-full overflow-hidden">
           <div className="flex gap-2 mb-2">
             <span className="text-terminal-green">$</span>
-            <TypingText text="nexus list" delay={50} />
+            <TypingText text="ost list" delay={50} />
           </div>
           <motion.div 
             initial={{ opacity: 0 }}
@@ -102,9 +102,9 @@ const Hero = () => {
             transition={{ delay: 1.5 }}
             className="text-white/80"
           >
-            <div>Nexus</div>
+            <div>Ostraca</div>
             <div>├── <span className="text-terminal-cyan">Projects</span></div>
-            <div>│   ├── <span className="text-white/40">ciwiXGri</span> | <span className="text-terminal-green">Project: Nexus CLI Development</span> <span className="text-white/40">(python, cli, sqlite)</span></div>
+            <div>│   ├── <span className="text-white/40">ciwiXGri</span> | <span className="text-terminal-green">Project: Ostraca CLI Development</span> <span className="text-white/40">(python, cli, sqlite)</span></div>
             <div>│   └── <span className="text-white/40">RP2nm8hq</span> | <span className="text-terminal-green">Project: Website Redesign</span> <span className="text-white/40">(web, redesign, frontend)</span></div>
             <div>├── <span className="text-terminal-cyan">Areas</span></div>
             <div>│   ├── <span className="text-white/40">CRuZG8MV</span> | <span className="text-terminal-green">Area: Personal Health</span> <span className="text-white/40">(health, fitness, habits)</span></div>
@@ -119,7 +119,7 @@ const Hero = () => {
 
           <div className="flex gap-2 mt-6 mb-2">
             <span className="text-terminal-green">$</span>
-            <TypingText text='nexus search "markdown"' delay={50} startDelay={3000} />
+            <TypingText text='ost search "markdown"' delay={50} startDelay={3000} />
           </div>
 
           <motion.div 
@@ -148,10 +148,10 @@ const Hero = () => {
               </div>
               <div className="grid grid-cols-[60px_1fr_80px_2fr_120px]">
                 <div className="px-2 py-2 border-r border-white/20 text-white/40">ciwiXGri</div>
-                <div className="px-2 py-2 border-r border-white/20 text-terminal-green">Project: Nexus CLI Development</div>
+                <div className="px-2 py-2 border-r border-white/20 text-terminal-green">Project: Ostraca CLI Development</div>
                 <div className="px-2 py-2 border-r border-white/20 text-purple-400">Project</div>
                 <div className="px-2 py-2 border-r border-white/20 text-white/60 leading-tight">
-                  ...Project tags: --- ## Nexus CLI Development ## TODO Items - [ ] Export function (file structure and <span className="text-yellow-400">markdown</span> files)
+                  ...Project tags: --- ## Ostraca CLI Development ## TODO Items - [ ] Export function (file structure and <span className="text-yellow-400">markdown</span> files)
                 </div>
                 <div className="px-2 py-2 text-terminal-green">2026-03-17 00:11:03</div>
               </div>
@@ -191,25 +191,25 @@ const FeatureGrid = () => {
       title: "Projects",
       icon: <FolderGit2 className="w-6 h-6" />,
       desc: "Active efforts with a deadline. Track milestones and daily logs.",
-      command: 'nexus add "<title>" --para Project'
+      command: 'ost add "<title>" --para Project'
     },
     {
       title: "Areas",
       icon: <Layers className="w-6 h-6" />,
       desc: "Ongoing responsibilities. Health, Finance, Career, Hobbies.",
-      command: 'nexus add "<title>" --para Area'
+      command: 'ost add "<title>" --para Area'
     },
     {
       title: "Resources",
       icon: <Database className="w-6 h-6" />,
       desc: "Topics of interest. Research, snippets, and reference material.",
-      command: 'nexus add "<title>" --para Resource'
+      command: 'ost add "<title>" --para Resource'
     },
     {
       title: "Archives",
       icon: <Archive className="w-6 h-6" />,
       desc: "Completed projects or inactive areas. Kept for future reference.",
-      command: 'nexus add "<title>" --para Archive'
+      command: 'ost add "<title>" --para Archive'
     }
   ];
 
@@ -218,7 +218,7 @@ const FeatureGrid = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">The PARA Advantage</h2>
-          <p className="text-white/50 max-w-2xl mx-auto">Nexus natively enforces the PARA organization method, ensuring every piece of information has a clear home and a defined lifecycle.</p>
+          <p className="text-white/50 max-w-2xl mx-auto">Ostraca natively enforces the PARA organization method, ensuring every piece of information has a clear home and a defined lifecycle.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -258,8 +258,8 @@ const AiMcpSection = () => {
               Bridge the Gap Between You and Your AI.
             </h2>
             <p className="text-white/60 text-lg mb-8 leading-relaxed">
-              Nexus isn't just for you; it's for your agents. With a built-in Model Context Protocol (MCP) server, 
-              Nexus serves as a high-fidelity context provider for LLMs, allowing them to autonomously search and retrieve your notes.
+              Ostraca isn't just for you; it's for your agents. With a built-in Model Context Protocol (MCP) server, 
+              Ostraca serves as a high-fidelity context provider for LLMs, allowing them to autonomously search and retrieve your notes.
             </p>
             
             <ul className="space-y-4">
@@ -280,7 +280,7 @@ const AiMcpSection = () => {
             <div className="bg-black rounded-lg border border-white/10 overflow-hidden">
               <div className="px-4 py-2 bg-white/5 border-b border-white/10 text-[10px] uppercase tracking-widest text-white/40">Human Readable</div>
               <pre className="p-4 text-xs md:text-sm text-terminal-green overflow-x-auto">
-{`$ nexus search "sqlite"
+{`$ ost search "sqlite"
                     Search Results for 'sqlite'
 ┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
 ┃ ID       ┃ Title                    ┃ Category ┃ Snippet             ┃ Last Updated        ┃
@@ -288,7 +288,7 @@ const AiMcpSection = () => {
 │ m3n4o5p6 │ SQLite FTS5 Documentation│ Resource │ ...how to optimize  │ 2026-03-19 14:30:05 │
 │          │                          │          │ sqlite search...    │                     │
 ├──────────┼──────────────────────────┼──────────┼─────────────────────┼─────────────────────┤
-│ e5f6g7h8 │ Nexus CLI Launch         │ Project  │ ...powered by a     │ 2026-03-19 10:15:22 │
+│ e5f6g7h8 │ Ostraca CLI Launch       │ Project  │ ...powered by a     │ 2026-03-19 10:15:22 │
 │          │                          │          │ sqlite backend...   │                     │
 └──────────┴──────────────────────────┴──────────┴─────────────────────┴─────────────────────┘`}
               </pre>
@@ -297,12 +297,12 @@ const AiMcpSection = () => {
             <div className="bg-black rounded-lg border border-white/10 overflow-hidden">
               <div className="px-4 py-2 bg-white/5 border-b border-white/10 text-[10px] uppercase tracking-widest text-white/40">AI Context (XML)</div>
               <pre className="p-4 text-xs md:text-sm text-terminal-cyan overflow-x-auto">
-{`<context_provider name="nexus">
+{`<context_provider name="ostraca">
   <search_result query="mcp">
     <note id="1" path="resources/mcp_guide.md">
       <content>The Model Context Protocol (MCP) is...</content>
     </note>
-    <note id="2" path="projects/nexus_cli.md">
+    <note id="2" path="projects/ostraca_cli.md">
       <content>Implemented MCP server in v1.2.0...</content>
     </note>
   </search_result>
@@ -321,9 +321,9 @@ const QuickStart = () => {
   const tabs = [
     {
       label: "1. Installation",
-      code: `# Install Nexus CLI directly from the source
-git clone https://github.com/mindslost/nexus-cli.git
-cd nexus-cli
+      code: `# Install Ostraca CLI directly from the source
+git clone https://github.com/mindslost/ostraca.git
+cd ostraca
 pip install -e .`
     },
     {
@@ -332,19 +332,19 @@ pip install -e .`
 export EDITOR=nvim  # Add this to your .zshrc or .bashrc
 
 # Enable shell autocompletion for note IDs and Titles
-nexus --install-completion zsh  # or bash/fish`
+ost --install-completion zsh  # or bash/fish`
     },
     {
       label: "3. PARA Workflow",
       code: `# Capture a New Note
-nexus add "New Feature Ideas" --para Project
+ost add "New Feature Ideas" --para Project
 # Note 'New Feature Ideas' added successfully.
 
 # Browse Your Knowledge Base
-nexus list
-Nexus
+ost list
+Ostraca
 ├── Projects
-│   ├── ciwiXGri | Project: Nexus CLI Development (python, cli, sqlite)
+│   ├── ciwiXGri | Project: Ostraca CLI Development (python, cli, sqlite)
 │   └── RP2nm8hq | Project: Website Redesign (web, redesign, frontend)
 ├── Areas
 │   ├── CRuZG8MV | Area: Personal Health (health, fitness, habits)
@@ -359,10 +359,10 @@ Nexus
     {
       label: "4. AI Integration",
       code: `# Start the MCP Server
-nexus mcp-start
-* FastMCP server 'Nexus' starting...
+ost mcp-start
+* FastMCP server 'Ostraca' starting...
 * Transport: stdio
-* Tools registered: search_nexus_notes, get_project_context
+* Tools registered: search_ostraca_notes, get_project_context
 * Server is running and waiting for AI agent requests. (Press Ctrl+C to stop)`
     }
   ];
@@ -400,7 +400,7 @@ nexus mcp-start
         
         <div className="mt-12 flex flex-col items-center gap-8">
           <a 
-            href="https://github.com/mindslost/nexus-cli/blob/main/docs/quickstart.md" 
+            href="https://github.com/mindslost/ostraca/blob/main/docs/quickstart.md" 
             target="_blank" 
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-terminal-green hover:text-white transition-colors font-bold group"
@@ -412,7 +412,7 @@ nexus mcp-start
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-white/40">
             <div className="flex items-start gap-3">
               <div className="mt-1 text-terminal-green"><PenLine className="w-4 h-4" /></div>
-              <p>Nexus uses your native <code className="text-white/60">$EDITOR</code> for zero-friction capture in standard Markdown.</p>
+              <p>Ostraca uses your native <code className="text-white/60">$EDITOR</code> for zero-friction capture in standard Markdown.</p>
             </div>
             <div className="flex items-start gap-3">
               <div className="mt-1 text-terminal-cyan"><Cpu className="w-4 h-4" /></div>
@@ -428,7 +428,7 @@ nexus mcp-start
 const CommandSimulator = () => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<{ type: 'in' | 'out', content: React.ReactNode }[]>([
-    { type: 'out', content: "Nexus CLI v1.2.0 — Type 'help' for commands." }
+    { type: 'out', content: "Ostraca CLI v1.2.0 — Type 'help' for commands." }
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -447,11 +447,11 @@ const CommandSimulator = () => {
     let output: React.ReactNode = "";
     const cmd = input.toLowerCase().trim();
 
-    if (cmd === 'help' || cmd === 'nexus --help') {
+    if (cmd === 'help' || cmd === 'ost --help' || cmd === 'ostraca --help') {
       output = (
         <div className="space-y-1 text-[10px] md:text-xs">
-          <div>Usage: nexus [OPTIONS] COMMAND [ARGS]...</div>
-          <div className="my-2">Nexus CLI - A terminal-based personal knowledge base enforcing the PARA method.</div>
+          <div>Usage: ost [OPTIONS] COMMAND [ARGS]...</div>
+          <div className="my-2">Ostraca CLI - A terminal-based personal knowledge base enforcing the PARA method.</div>
           <div className="text-terminal-cyan">Options:</div>
           <div>  --install-completion [bash|zsh|fish|powershell|pwsh]</div>
           <div>  --show-completion [bash|zsh|fish|powershell|pwsh]</div>
@@ -467,12 +467,12 @@ const CommandSimulator = () => {
           <div>  search     Search notes using Full-Text Search.</div>
         </div>
       );
-    } else if (cmd === 'nexus list' || cmd === 'list') {
+    } else if (cmd === 'ost list' || cmd === 'list') {
       output = (
         <div className="space-y-0 text-[10px] md:text-xs font-mono">
-          <div>Nexus</div>
+          <div>Ostraca</div>
           <div>├── <span className="text-terminal-cyan">Projects</span></div>
-          <div>│   ├── <span className="text-white/40">ciwiXGri</span> | <span className="text-terminal-green">Project: Nexus CLI Development</span> <span className="text-white/40">(python, cli, sqlite)</span></div>
+          <div>│   ├── <span className="text-white/40">ciwiXGri</span> | <span className="text-terminal-green">Project: Ostraca CLI Development</span> <span className="text-white/40">(python, cli, sqlite)</span></div>
           <div>│   └── <span className="text-white/40">RP2nm8hq</span> | <span className="text-terminal-green">Project: Website Redesign</span> <span className="text-white/40">(web, redesign, frontend)</span></div>
           <div>├── <span className="text-terminal-cyan">Areas</span></div>
           <div>│   ├── <span className="text-white/40">CRuZG8MV</span> | <span className="text-terminal-green">Area: Personal Health</span> <span className="text-white/40">(health, fitness, habits)</span></div>
@@ -485,7 +485,7 @@ const CommandSimulator = () => {
           <div>    └── <span className="text-white/40">eMUiCjH9</span> | <span className="text-terminal-green">Archive: Budget 2024</span> <span className="text-white/40">(finance, budget, historical)</span></div>
         </div>
       );
-    } else if (cmd.startsWith('nexus search') || cmd.startsWith('search') || cmd.startsWith('nexus cli') || cmd.startsWith('cli')) {
+    } else if (cmd.startsWith('ost search') || cmd.startsWith('search') || cmd.startsWith('ost cli') || cmd.startsWith('cli')) {
       output = (
         <div className="space-y-0 text-[8px] md:text-[10px] font-mono leading-tight">
           <div className="text-center">Search Results for 'sqlite'</div>
@@ -495,19 +495,19 @@ const CommandSimulator = () => {
           <div>│ m3n4o5p6 │ SQLite FTS5 Documentation│ Resource │ ...how to optimize  │ 2026-03-19 14:30:05 │</div>
           <div>│          │                          │          │ sqlite search...    │                     │</div>
           <div>├──────────┼──────────────────────────┼──────────┼─────────────────────┼─────────────────────┤</div>
-          <div>│ e5f6g7h8 │ Nexus CLI Launch         │ Project  │ ...powered by a     │ 2026-03-19 10:15:22 │</div>
+          <div>│ e5f6g7h8 │ Ostraca CLI Launch       │ Project  │ ...powered by a     │ 2026-03-19 10:15:22 │</div>
           <div>│          │                          │          │ sqlite backend...   │                     │</div>
           <div>└──────────┴──────────────────────────┴──────────┴─────────────────────┴─────────────────────┘</div>
         </div>
       );
-    } else if (cmd.startsWith('nexus add') || cmd.startsWith('add')) {
+    } else if (cmd.startsWith('ost add') || cmd.startsWith('add')) {
       output = <div className="text-terminal-green">Note 'New Feature Ideas' added successfully.</div>;
-    } else if (cmd.startsWith('nexus mcp-start') || cmd.startsWith('mcp-start')) {
+    } else if (cmd.startsWith('ost mcp-start') || cmd.startsWith('mcp-start')) {
       output = (
         <div className="space-y-1">
-          <div>* FastMCP server 'Nexus' starting...</div>
+          <div>* FastMCP server 'Ostraca' starting...</div>
           <div>* Transport: stdio</div>
-          <div>* Tools registered: search_nexus_notes, get_project_context</div>
+          <div>* Tools registered: search_ostraca_notes, get_project_context</div>
           <div>* Server is running and waiting for AI agent requests. (Press Ctrl+C to stop)</div>
         </div>
       );
@@ -529,7 +529,7 @@ const CommandSimulator = () => {
         
         <div className="bg-oled-black rounded-lg border border-white/10 shadow-2xl overflow-hidden">
           <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4">
-            <div className="text-[10px] text-white/30 uppercase tracking-widest">nexus-simulator — interactive</div>
+            <div className="text-[10px] text-white/30 uppercase tracking-widest">ost-simulator — interactive</div>
           </div>
           
           <div 
@@ -568,7 +568,7 @@ const Footer = () => (
       <div className="flex flex-col items-center md:items-start gap-4">
         <div className="flex items-center gap-2">
           <Terminal className="text-terminal-green w-5 h-5" />
-          <span className="font-bold tracking-tighter">nexus.cli</span>
+          <span className="font-bold tracking-tighter">ostraca.cli</span>
         </div>
         <p className="text-white/30 text-xs text-center md:text-left">
           Built with Typer & Rich. Apache License 2.0. © 2026 Jason Lysinger.
@@ -576,8 +576,8 @@ const Footer = () => (
       </div>
       
       <div className="flex gap-8">
-        <a href="https://github.com/mindslost/nexus-cli" className="text-white/40 hover:text-white transition-colors"><Github className="w-5 h-5" /></a>
-        <a href="https://github.com/mindslost/nexus-cli/blob/main/docs/documentation.md" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors text-sm font-bold">Documentation</a>
+        <a href="https://github.com/mindslost/ostraca" className="text-white/40 hover:text-white transition-colors"><Github className="w-5 h-5" /></a>
+        <a href="https://github.com/mindslost/ostraca/blob/main/docs/documentation.md" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors text-sm font-bold">Documentation</a>
         <a href="#" className="text-white/40 hover:text-white transition-colors text-sm font-bold">Changelog</a>
       </div>
       

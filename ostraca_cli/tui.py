@@ -1,15 +1,15 @@
 from typing import List, Optional, Tuple, Any
 from rich.text import Text
 from textual.app import App, ComposeResult
-from textual.widgets import Tree, Header, Footer, Static, Label, Select, Button, OptionList
+from textual.widgets import Tree, Header, Footer, Static, Label, Button, OptionList
 from textual.widgets.option_list import Option
 from textual.screen import ModalScreen
 from textual.binding import Binding
 from textual.containers import Vertical, Horizontal
 from textual import on
 
-from nexus_cli.db import PARA_CATEGORIES
-from nexus_cli.config import get_preference, set_preference
+from ostraca_cli.db import PARA_CATEGORIES
+from ostraca_cli.config import get_preference, set_preference
 
 
 class MoveCategoryScreen(ModalScreen[str]):
@@ -86,10 +86,10 @@ class DeleteConfirmationScreen(ModalScreen[bool]):
         self.dismiss(False)
 
 
-class NexusListApp(App[Optional[Tuple[str, Any]]]):
-    """An interactive TUI for browsing and acting on Nexus notes."""
+class OstracaListApp(App[Optional[Tuple[str, Any]]]):
+    """An interactive TUI for browsing and acting on Ostraca notes."""
 
-    TITLE = "Nexus CLI - PARA Navigator"
+    TITLE = "Ostraca CLI - PARA Navigator"
     CSS = """
     Screen {
         background: $surface;
@@ -173,7 +173,7 @@ class NexusListApp(App[Optional[Tuple[str, Any]]]):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        tree: Tree[Optional[str]] = Tree("Nexus", id="notes_tree")
+        tree: Tree[Optional[str]] = Tree("Ostraca", id="notes_tree")
         tree.root.expand()
 
         categories = {}

@@ -1,15 +1,15 @@
-# Autocompletion for Nexus CLI
+# Autocompletion for Ostraca CLI
 
 ## Objective
 Enable shell autocompletion for note IDs and Titles across commands that require them (`edit`, `open`, `move`, `delete`).
 
 ## Key Files & Context
-- `nexus_cli/main.py`: Update the Typer initialization to enable completions. Create an `autocompletion` callback function and apply it to the `identifier` arguments of the relevant commands.
+- `ostraca_cli/main.py`: Update the Typer initialization to enable completions. Create an `autocompletion` callback function and apply it to the `identifier` arguments of the relevant commands.
 
 ## Implementation Steps
 
 ### 1. Enable Completions
-- In `nexus_cli/main.py`, change `add_completion=False` to `add_completion=True` in the `typer.Typer` instantiation.
+- In `ostraca_cli/main.py`, change `add_completion=False` to `add_completion=True` in the `typer.Typer` instantiation.
 
 ### 2. Create Completion Function
 - Create a function `complete_note_identifier(incomplete: str) -> List[str]`:
@@ -24,5 +24,5 @@ Enable shell autocompletion for note IDs and Titles across commands that require
   ```
 
 ## Verification & Testing
-- Note that Typer completions must be installed in the shell (e.g., `nexus --install-completion zsh`).
+- Note that Typer completions must be installed in the shell (e.g., `ost --install-completion zsh`).
 - Mock testing: We will test by verifying the code structure. The user can then test it in their shell environment.

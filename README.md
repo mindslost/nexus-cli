@@ -1,23 +1,23 @@
-<img width="1060" height="808" alt="image" src="https://github.com/user-attachments/assets/58515586-4e1a-4db5-9cca-56c315635b2f" />
+# Ostraca
 
-# Nexus
+**Ostraca: Frictionless markdown for humans. High-speed context for AI.**
 
-**Nexus CLI**: A blazing-fast, terminal-based personal knowledge base built with Python and SQLite. It natively enforces the **PARA** (Projects, Areas, Resources, Archives) organization method, features lightning-fast full-text search via FTS5, and manages your notes seamlessly through Markdown and your favorite terminal editor.
+In the ancient world, an *ostracon* was a pottery shard used as an everyday scratchpad—a frictionless way to jot down quick notes, receipts, and thoughts. 
 
-Nexus is designed to be both a frictionless human interface for knowledge capture and a high-performance context provider for AI agents via the **Model Context Protocol (MCP)**.
+**Ostraca CLI** brings that same instant capture to your terminal. It’s a blazing-fast personal knowledge base built with Python and SQLite that natively enforces the PARA method. Whether you are writing Markdown in your favorite editor or feeding structured context to an AI agent via the built-in MCP server, Ostraca keeps your knowledge organized, searchable, and instantly accessible.
 
 ---
 
 ## 🚀 Key Features
 
-- **PARA Method Enforcement**: Organizes notes into four distinct categories: *Projects*, *Areas*, *Resources*, and *Archives*.
-- **Frictionless Capture**: Use your native `$EDITOR` (Vim, Emacs, Nano, etc.) to write notes in standard Markdown.
-- **SQLite + FTS5**: Notes are indexed in real-time using SQLite's FTS5 virtual table for instant full-text search across titles, content, and tags. Search results include context snippets for human-readable output.
-- **YAML Frontmatter**: Metadata is stored directly in the Markdown file, ensuring your notes remain portable and self-contained. Supports complex titles with quotes and colons.
-- **AI-Ready**:
-  - **MCP Server**: Built-in support for the Model Context Protocol, allowing AI agents (like Claude Code) to autonomously search and retrieve your notes.
-  - **Machine-Readable Output**: The `search` command includes a `--raw` flag that outputs clean XML specifically formatted for LLM context windows.
-- **Visual Organization**: View your entire knowledge base in a clean, hierarchical tree format using `rich`.
+* **PARA Method Enforcement**: Automatically organizes your workflow into four distinct categories: *Projects*, *Areas*, *Resources*, and *Archives*.
+* **Frictionless Capture**: Use your native `$EDITOR` (whether that's Doom Emacs, Neovim, or VS Code) to write notes in standard Markdown.
+* **Lightning-Fast Retrieval**: Notes are indexed in real-time using SQLite's FTS5 virtual table. Get instant full-text search across titles, content, and tags, complete with human-readable context snippets.
+* **Self-Contained Metadata**: Uses YAML frontmatter stored directly in the Markdown file, ensuring your notes remain portable, parseable, and independent. 
+* **AI-Ready Architecture**:
+    * **Built-in MCP Server**: Native support for the Model Context Protocol, allowing AI agents like Claude Code to autonomously search, read, and retrieve your notes.
+    * **Machine-Readable Output**: The `search` command includes a `--raw` flag that outputs clean XML specifically formatted to maximize LLM context windows.
+* **Visual Organization**: View your entire knowledge base in a clean, hierarchical tree format right in the terminal.
 
 ---
 
@@ -27,30 +27,30 @@ Nexus is designed to be both a frictionless human interface for knowledge captur
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/nexus.git
-   cd nexus
-   ```
+```bash
+git clone https://github.com/your-username/ostraca.git
+cd ostraca
+```
 
 2. Install the package in editable mode:
 
-   ```bash
-   pip install -e .
-   ```
+```bash
+pip install -e .
+```
 
-3. Ensure your `$EDITOR` environment variable is set (defaults to `vim`):
+3. Ensure your `$EDITOR` environment variable is set. Ostraca respects your terminal environment, whether you prefer a terminal editor or a GUI:
 
-   ```bash
-   export EDITOR=nvim  # or your preferred editor
-   ```
+```bash
+export EDITOR="emacsclient -c" # or "code --wait", "nvim", "vim", etc.
+```
 
 ### Shell Autocompletion
 
-Nexus supports shell autocompletion for note IDs and Titles. To enable it, run the command for your shell:
+Ostraca supports shell autocompletion for note IDs and Titles. To enable it, run the command for your shell:
 
-- **Zsh**: `nexus --install-completion zsh`
-- **Bash**: `nexus --install-completion bash`
-- **Fish**: `nexus --install-completion fish`
+* **Zsh**: `ost --install-completion zsh`
+* **Bash**: `ost --install-completion bash`
+* **Fish**: `ost --install-completion fish`
 
 *Note: You may need to restart your terminal or source your shell's configuration file (e.g., `source ~/.zshrc`) for changes to take effect.*
 
@@ -61,19 +61,17 @@ Nexus supports shell autocompletion for note IDs and Titles. To enable it, run t
 ### 1. Add a New Note
 
 ```bash
-nexus add "New Feature Specs" --para Project
+ost add "New Feature Specs" --para Project
 ```
-
-This will open your editor with a pre-populated YAML frontmatter block.
+This will open your editor with a pre-populated YAML frontmatter block, ready for you to start typing.
 
 ### 2. List Your Notes
 
 ```bash
-nexus list
-nexus list --para Project
-nexus list --tags python,security
+ost list
+ost list --para Project
+ost list --tags python,security
 ```
-
 Displays a tree structure of all your notes organized by PARA category.
 
 ### 2.1 Interactive Selection TUI
@@ -81,64 +79,63 @@ Displays a tree structure of all your notes organized by PARA category.
 To interactively browse, open (`o`), edit (`e`), move (`m`), or delete (`d`) notes using arrow keys or Vim-style movement (`j/k`):
 
 ```bash
-nexus list --interactive
+ost list --interactive
 # or
-nexus list -i
+ost list -i
 ```
-
 
 ### 3. Search Your Knowledge Base
 
 ```bash
-nexus search "database optimization"
+ost search "database optimization"
 ```
-
 Uses FTS5 for a high-speed search across all note titles and content, displaying highlighted context snippets.
 
 ### 4. Edit a Note
 
 ```bash
-nexus edit "New Feature Specs"
+ost edit "New Feature Specs"
 ```
 
 ### 5. Move a Note (Re-categorize)
 
 ```bash
-nexus move "Old Project" --to Archive
+ost move "Old Project" --to Archive
 ```
 
 ### 6. Delete a Note
 
 ```bash
-nexus delete "Old Project"
+ost delete "Old Project"
 ```
-
 Removes a note by ID or Title with a confirmation prompt.
 
 ---
 
 ## 🤖 MCP Integration
 
-Nexus includes a built-in MCP server, enabling AI agents to interact with your personal knowledge base.
+Ostraca includes a built-in MCP server, enabling AI agents to interact seamlessly with your personal knowledge base.
 
 ### Starting the MCP Server
 
 ```bash
-nexus mcp-start
+ost mcp-start
 ```
 
 ### Available Tools for AI Agents
 
-- `search_nexus_notes(query: str, category: str = None)`: Search for notes using full-text search.
-- `get_project_context(project_name: str)`: Retrieve the full content and metadata for a specific project note.
+* `search_ostraca_notes(query: str, category: str = None)`: Search for notes using full-text search.
+* `get_project_context(project_name: str)`: Retrieve the full content and metadata for a specific project note.
 
-To use Nexus with **Claude Desktop**, add the following to your `claude_desktop_config.json`:
+### Claude Desktop Configuration
+
+To use Ostraca with Claude Desktop, add the following to your `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "nexus": {
-      "command": "nexus",
+    "ostraca": {
+      "command": "ost",
       "args": ["mcp-start"]
     }
   }
@@ -150,8 +147,8 @@ To use Nexus with **Claude Desktop**, add the following to your `claude_desktop_
 ## 📁 Project Structure
 
 ```text
-nexus/
-├── nexus_cli/
+ostraca/
+├── ostraca_cli/
 │   ├── main.py          # CLI commands (Typer) and MCP server (FastMCP)
 │   ├── db.py            # SQLite schema, FTS5 triggers, and DB utilities
 │   └── frontmatter.py   # Regex-based YAML frontmatter parser
@@ -160,7 +157,7 @@ nexus/
 └── README.md            # You are here
 ```
 
-- **Database Location**: `~/.para_notes.db` (SQLite)
+* **Database Location**: `~/.para_notes.db` (SQLite)
 
 ---
 

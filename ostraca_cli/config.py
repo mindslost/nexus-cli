@@ -1,5 +1,5 @@
 """
-Configuration management for the Nexus CLI.
+Configuration management for the Ostraca CLI.
 
 This module handles loading and saving user preferences like themes
 from a JSON configuration file in the user's home directory.
@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict
 
-CONFIG_PATH: Path = Path.home() / ".nexus_config.json"
+CONFIG_PATH: Path = Path.home() / ".ostraca_config.json"
 
 DEFAULT_CONFIG: Dict[str, Any] = {
     "theme": "textual-dark",

@@ -1,5 +1,5 @@
 """
-Database management for the Nexus CLI.
+Database management for the Ostraca CLI.
 
 This module handles SQLite database connections, schema initialization,
 and Full-Text Search (FTS5) index synchronization using triggers.

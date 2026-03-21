@@ -1,10 +1,10 @@
-# Nexus CLI Quickstart Guide
+# Ostraca CLI Quickstart Guide
 
-Get up and running with Nexus CLI, your terminal-based personal knowledge base enforcing the PARA method.
+Get up and running with Ostraca CLI, your terminal-based personal knowledge base enforcing the PARA method.
 
 ## 1. Installation
 
-Install Nexus CLI in editable mode from the project root:
+Install Ostraca CLI in editable mode from the project root:
 
 ```bash
 pip install -e .
@@ -18,10 +18,10 @@ export EDITOR=nano  # or vim, code, etc.
 
 ## 2. Create Your First Note
 
-Nexus uses the PARA method (Projects, Areas, Resources, Archives). Create a new note by specifying a title and a category:
+Ostraca uses the PARA method (Projects, Areas, Resources, Archives). Create a new note by specifying a title and a category:
 
 ```bash
-nexus add "Launch Nexus CLI" --para Project
+ost add "Launch Ostraca CLI" --para Project
 ```
 
 This will open your editor with pre-filled YAML frontmatter. Add your content below the `---` separators and save.
@@ -31,13 +31,13 @@ This will open your editor with pre-filled YAML frontmatter. Add your content be
 View your PARA tree to see how your knowledge is organized:
 
 ```bash
-nexus list
+ost list
 ```
 
 For an interactive experience to open, edit, or move notes, use:
 
 ```bash
-nexus list --interactive
+ost list --interactive
 ```
 
 ## 4. Search Your Knowledge
@@ -45,7 +45,7 @@ nexus list --interactive
 Use powerful full-text search to find specific information across all notes:
 
 ```bash
-nexus search "launch"
+ost search "launch"
 ```
 
 ## 5. Manage Notes
@@ -53,19 +53,19 @@ nexus search "launch"
 ### Edit a Note
 Use the unique 8-character ID or the full Title:
 ```bash
-nexus edit [ID|Title]
+ost edit [ID|Title]
 ```
 
 ### Move a Note
 Quickly change a note's PARA category:
 ```bash
-nexus move [ID|Title] --to Area
+ost move [ID|Title] --to Area
 ```
 
 ### Delete a Note
 Permanently remove a note (requires confirmation):
 ```bash
-nexus delete [ID|Title]
+ost delete [ID|Title]
 ```
 
 ## 6. AI Integration (MCP)
@@ -73,5 +73,5 @@ nexus delete [ID|Title]
 If you use AI agents that support the Model Context Protocol (MCP), start the server:
 
 ```bash
-nexus mcp-start
+ost mcp-start
 ```
